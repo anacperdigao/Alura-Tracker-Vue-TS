@@ -34,11 +34,12 @@ import { defineComponent } from 'vue';
 export default defineComponent({
     name: 'FormularioPrincipal',
 
-    
+
     //Dentro de data é onde eu vou colocar os estados que eu quero manipular
     data () {
         return {
-            tempoEmSegundos: 0
+            tempoEmSegundos: 0,
+            cronometro: 0,
         }
     },
 
@@ -55,12 +56,12 @@ export default defineComponent({
     methods: {
         iniciar () {
             // essa função nativa do JS recebe 2 params, uma função que de fato quero fazer, e o tempo em milisegundos
-            setInterval(() => {
+            this.cronometro = setInterval(() => {
                 this.tempoEmSegundos = this.tempoEmSegundos + 1
             }, 1000)
         },
         finalizar () {
-            console.log("Finalizando")
+            clearInterval(this.cronometro)
         }
     }
 })
