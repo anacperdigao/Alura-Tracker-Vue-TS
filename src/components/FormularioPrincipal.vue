@@ -7,7 +7,7 @@
             <div class="column">
                 <div class="is-flex is-align-items-center is-justify-content-space-between">
                     <section>
-                        <strong>00:00:00</strong>
+                        <strong>{{tempoDecorrido}}</strong>
                     </section>
                     <button class="button" @click="iniciar">
                         <span class="icon">
@@ -33,9 +33,31 @@ import { defineComponent } from 'vue';
 
 export default defineComponent({
     name: 'FormularioPrincipal',
+
+    
+    //Dentro de data é onde eu vou colocar os estados que eu quero manipular
+    data () {
+        return {
+            tempoEmSegundos: 0
+        }
+    },
+
+
+    //Ele monitora uma informação, e conforme essa informação for alterada, ele vai reagir e vai atualizar
+    computed: {
+        tempoDecorrido () : string {
+            return new Date(this.tempoEmSegundos * 1000).toISOString().substring(11, 19)
+        }
+    },
+
+
+    //Dentro de methods são os métodos(funções) que eu vou utilizar nesse componente
     methods: {
         iniciar () {
-            console.log("Iniciando")
+            // essa função nativa do JS recebe 2 params, uma função que de fato quero fazer, e o tempo em milisegundos
+            setInterval(() => {
+                this.tempoEmSegundos = this.tempoEmSegundos + 1
+            }, 1000)
         },
         finalizar () {
             console.log("Finalizando")
