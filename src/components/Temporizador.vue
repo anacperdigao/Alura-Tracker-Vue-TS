@@ -27,6 +27,9 @@ export default defineComponent ({
     // eslint-disable-next-line vue/multi-word-component-names
     name: 'Temporizador',
 
+    // Uma lista de eventos que esse componente é capaz de emitir
+    emits: ['aoTemporizadorFinalizado'],
+
     //Dentro de data é onde eu vou colocar os estados que eu quero manipular
     data () {
         return {
@@ -49,6 +52,10 @@ export default defineComponent ({
         finalizar () {
             this.cronometroRodando= false
             clearInterval(this.cronometro)
+            // Esse metodo $emit recebe dois params: 
+            // (nome do evento que vai emitir, payload que é a carga de dados que vai junto)
+            this.$emit('aoTemporizadorFinalizado', this.tempoEmSegundos)
+            this.tempoEmSegundos = 0
         }
     },
 
