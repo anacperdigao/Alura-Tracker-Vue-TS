@@ -5,21 +5,7 @@
                 <input type="text" class="input" placeholder="Qual tarefa você deseja iniciar?">
             </div>
             <div class="column">
-                <div class="is-flex is-align-items-center is-justify-content-space-between">
-                    <Cronometro :tempoEmSegundos="tempoEmSegundos"/>
-                    <button class="button" @click="iniciar">
-                        <span class="icon">
-                            <i class="fas fa-play"></i>
-                        </span>
-                        <span>play</span>
-                    </button>
-                    <button class="button" @click="finalizar">
-                        <span class="icon">
-                            <i class="fas fa-stop"></i>
-                        </span>
-                        <span>stop</span>
-                    </button>
-                </div>
+                <Temporizador />
             </div>
         </div>
     </div>
@@ -28,36 +14,13 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import Cronometro from './Cronometro.vue';
+import Temporizador from './Temporizador.vue';
 
 export default defineComponent({
     name: 'FormularioPrincipal',
 
-
-    //Dentro de data é onde eu vou colocar os estados que eu quero manipular
-    data () {
-        return {
-            tempoEmSegundos: 0,
-            cronometro: 0,
-        }
-    },
-
-
-    //Dentro de methods são os métodos(funções) que eu vou utilizar nesse componente
-    methods: {
-        iniciar () {
-            // essa função nativa do JS recebe 2 params, uma função que de fato quero fazer, e o tempo em milisegundos
-            this.cronometro = setInterval(() => {
-                this.tempoEmSegundos = this.tempoEmSegundos + 1
-            }, 1000)
-        },
-        finalizar () {
-            clearInterval(this.cronometro)
-        }
-    },
-
     components: {
-        Cronometro,
+        Temporizador,
     }
 })
 </script>
