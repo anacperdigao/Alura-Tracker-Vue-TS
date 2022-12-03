@@ -36,10 +36,15 @@ export default defineComponent({
         }
     },
 
+    // Uma lista de eventos que esse componente é capaz de emitir
+    emits: ['aoSalvarTarefa'],
+
     methods: {
         finalizarTarefa (tempoDecorrido: number): void {
-            console.log(tempoDecorrido)
-            console.log(this.descricao)
+            this.$emit('aoSalvarTarefa', {
+                duracaoEmSegundos: tempoDecorrido,
+                descricao: this.descricao
+            })
             this.descricao = ""
         }
     }
