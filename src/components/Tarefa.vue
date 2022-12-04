@@ -1,5 +1,5 @@
 <template>
-    <div class="box has-text-weight-bold">
+    <Box>
         <div class="columns">
             <div class="column is-7">
                 {{tarefa.descricao || 'Tarefa sem descrição'}}
@@ -8,7 +8,7 @@
                 <Cronometro :tempoEmSegundos="tarefa.duracaoEmSegundos"/>
             </div>
         </div>
-    </div>
+    </Box>
 </template>
 
 
@@ -16,6 +16,7 @@
 import ITarefa from '@/interfaces/ITarefa';
 import { defineComponent, PropType } from 'vue';
 import Cronometro from './Cronometro.vue';
+import Box from './Box.vue';
 
 export default defineComponent({
     // eslint-disable-next-line vue/multi-word-component-names
@@ -32,6 +33,7 @@ export default defineComponent({
 
     components: {
         Cronometro,
+        Box,
     }
 })
 
@@ -39,8 +41,5 @@ export default defineComponent({
 
 
 <style scoped>
-.box{
-    background: #faf0ca;
-}
 
 </style>
