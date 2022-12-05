@@ -4,13 +4,18 @@
     <div class="column is-one-quarter">
       <BarraLateral />
     </div> 
-    <div class="column is-three-quarter">
+    <div class="column is-three-quarter conteudo">
       <FormularioPrincipal @aoSalvarTarefa="salvarTarefa"/>
       <div class="lista">
-        <Tarefa v-for="(tarefa, index) in tarefas" :key="index" :tarefa="tarefa"/>
-        <Box v-if="listaEstaVazia"> <!-- v-if é utilizado para renderização condicional -->
+        
+        <!-- v-for é utilizado para renderizar N vezes um componente, como se fosse .map -->
+        <Tarefa v-for="(tarefa, index) in tarefas" :key="index" :tarefa="tarefa"/> 
+        
+        <!-- v-if é utilizado para renderização condicional -->
+        <Box v-if="listaEstaVazia"> 
         Você não está muito produtivo hoje :(
         </Box>
+      
       </div>
     </div> 
   </main>
@@ -58,5 +63,19 @@ export default defineComponent({
 <style>
 .lista{
   padding: 1.25rem;
+}
+
+main{
+  --bg-primario: #fff;
+  --texto-primario: #000;
+}
+
+main.modo-escuro {
+  --bg-primario: #2b2d42;
+  --texto-primario: #ddd;
+}
+
+.conteudo{
+  background-color: var(--bg-primario);
 }
 </style>

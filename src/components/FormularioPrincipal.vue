@@ -1,6 +1,6 @@
 <!-- v-model é quem vai linkar o input com o estado -->
 <template>
-    <div class="box">
+    <div class="box formulario">
         <div class="columns">
             <div class="column is-8" role="form" aria-label="Formulário para criação de uma nova tarefa">
                 <input 
@@ -51,7 +51,12 @@ export default defineComponent({
 })
 </script>
 
+<!-- Nao vou colocar scoped de proposito pq quero que ele passe para os componentes filhos -->
+<style>
 
-<style scoped>
+.formulario{
+    color: var(--texto-primario);
+    background-color: var(--bg-primario);
+}
 
 </style>
