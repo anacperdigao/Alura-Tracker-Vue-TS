@@ -36,7 +36,7 @@ export default defineComponent({
         }
     },
 
-    // Uma lista de eventos que esse componente é capaz de emitir
+    // Uma lista de eventos que esse componente é capaz de emitir para o componente Pai
     emits: ['aoSalvarTarefa'],
 
     methods: {

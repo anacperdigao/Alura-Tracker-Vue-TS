@@ -4,6 +4,9 @@
         <h1>
             <img src="../assets/logo.png" alt="Logo Alura Tracker">
         </h1>
+        <button class="button" @click="alterarTema">
+            {{textoBotao}}
+        </button>
     </header>
 </template>
 
@@ -13,7 +16,31 @@
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-    name: 'BarraLateral'
+    name: 'BarraLateral',
+
+    emits: ['aoTemaAlterado'],
+
+    data () {
+        return {
+            modoEscuroAtivo: false
+        }
+    },
+
+    computed: {
+        textoBotao () {
+            if (this.modoEscuroAtivo) {
+                return 'Desativar modo escuro'
+            }
+            return 'Ativar modo escuro'
+        }
+    },
+
+    methods: {
+        alterarTema () {
+            this.modoEscuroAtivo = !this.modoEscuroAtivo
+            this.$emit('aoTemaAlterado', this.modoEscuroAtivo)
+        }
+    },
 })
 </script>
 
