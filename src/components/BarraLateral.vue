@@ -1,4 +1,3 @@
-<!-- Aqui vem todo o HTML do componente -->
 <template>
     <header>
         <h1>
@@ -11,8 +10,8 @@
 </template>
 
 
-<!-- Aqui vem o JS ou TS, sendo que eu também uso para exportar esse componente todo para usar em outro lugar -->
 <script lang="ts">
+
 import { defineComponent } from 'vue';
 
 export default defineComponent({
@@ -42,10 +41,10 @@ export default defineComponent({
         }
     },
 })
+
 </script>
 
 
-<!-- Aqui vem o CSS do componente -->
 <style scoped>
 header {
     background: #0d3b66;
