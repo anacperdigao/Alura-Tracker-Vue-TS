@@ -19,7 +19,7 @@ import Box from '../components/Box.vue';
 import ITarefa from '../interfaces/ITarefa';
 
 export default defineComponent({
-  name: 'App',
+  name: 'TarefasView',
 
   //Dentro de data é onde eu vou colocar os estados que eu quero manipular
   data () {

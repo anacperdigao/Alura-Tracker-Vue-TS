@@ -40,6 +40,10 @@ export default defineComponent({
 </script>
 
 <style>
+body{
+  user-select: none;
+}
+
 .lista{
   padding: 1.25rem;
 }
