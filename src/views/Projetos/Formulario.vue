@@ -26,6 +26,9 @@
 import { defineComponent } from 'vue';
 import { useStore } from '@/store'
 import { ADICIONA_PROJETO, ALTERA_PROJETO } from '@/store/type-mutations';
+import { TipoDeNotificacao } from '@/interfaces/INotificacao';
+// import { notificacaoMixin } from '@/mixins/notificar'
+import useNotificador from '@/hooks/notificador'
 
 
 export default defineComponent({
@@ -50,6 +53,9 @@ export default defineComponent({
         }
     },
 
+    // Poderia utilizar o mixin, mas vou utilizar o hook customizado.
+    // mixins: [notificacaoMixin],
+
     methods: {
         salvar () {
             if (this.id){
@@ -61,14 +67,18 @@ export default defineComponent({
                 this.store.commit(ADICIONA_PROJETO, this.nomeDoProjeto)
             }
             this.nomeDoProjeto = ''
+            this.notificar(TipoDeNotificacao.SUCESSO, 'Excelente!', 'O projeto foi cadastrado com sucesso.')
             this.$router.push('/projetos')
-        }
+        },
     },
 
     setup () {
         const store = useStore()
+        const { notificar } = useNotificador()
+        
         return{
-            store
+            store,
+            notificar
         }
     }
 })

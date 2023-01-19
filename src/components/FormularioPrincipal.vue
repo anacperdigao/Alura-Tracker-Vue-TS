@@ -33,7 +33,9 @@
 
 
 <script lang="ts">
-import { key } from '@/store';
+import { TipoDeNotificacao } from '@/interfaces/INotificacao';
+import { key, store } from '@/store';
+import { ADICIONA_NOTIFICACAO } from '@/store/type-mutations';
 import { defineComponent, computed } from 'vue';
 import { useStore } from 'vuex';
 import Temporizador from './Temporizador.vue';
@@ -58,11 +60,20 @@ export default defineComponent({
 
     methods: {
         finalizarTarefa (tempoDecorrido: number): void {
-            this.$emit('aoSalvarTarefa', {
+            if (!this.projetos.find(proj => proj.id == this.idProjeto)) {
+                store.commit(ADICIONA_NOTIFICACAO, {
+                titulo: 'Ops.',
+                texto: 'Tarefa não pode ser finalizada sem projeto.',
+                tipo: TipoDeNotificacao.FALHA
+            })
+            } else {
+                this.$emit('aoSalvarTarefa', {
                 duracaoEmSegundos: tempoDecorrido,
                 descricao: this.descricao,
                 projeto: this.projetos.find(proj => proj.id == this.idProjeto)
-            })
+                })
+            }
+
             this.descricao = ""
         }
     },

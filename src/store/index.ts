@@ -3,11 +3,11 @@
 // Vale prestar atenção na tipagem da key, pq ela é uma InjectionKey que representa uma Store e essa Store é de 
 // um tipo que é a interface Estado.
 
-import { INotificacao, TipoDeNotificacao } from "@/interfaces/INotificacao";
+import { INotificacao } from "@/interfaces/INotificacao";
 import IProjeto from "@/interfaces/IProjeto";
 import { InjectionKey } from "@vue/runtime-core";
 import { createStore, Store, useStore as vuexUseStore } from "vuex";
-import { ADICIONA_PROJETO, ALTERA_PROJETO, EXCLUIR_PROJETO } from "./type-mutations";
+import { ADICIONA_NOTIFICACAO, ADICIONA_PROJETO, ALTERA_PROJETO, EXCLUIR_PROJETO } from "./type-mutations";
 
 interface Estado {
     projetos: IProjeto[],
@@ -19,26 +19,7 @@ export const key: InjectionKey<Store<Estado>> = Symbol()
 export const store = createStore<Estado>({
     state: {
         projetos: [],
-        notificacoes: [
-            {
-                id: 1,
-                texto: 'Uma notificação de sucesso.',
-                titulo: 'Sucesso',
-                tipo: TipoDeNotificacao.SUCESSO
-            },
-            {
-                id: 2,
-                texto: 'Uma notificação de atenção.',
-                titulo: 'Atenção',
-                tipo: TipoDeNotificacao.ATENCAO
-            },
-            {
-                id: 3,
-                texto: 'Uma notificação de falha.',
-                titulo: 'Falha',
-                tipo: TipoDeNotificacao.FALHA
-            }
-        ]
+        notificacoes: []
     },
     mutations: {
         [ADICIONA_PROJETO](state, nomeDoProjeto: string) {
@@ -59,6 +40,14 @@ export const store = createStore<Estado>({
             state.projetos.splice(index, 1)
         },
 
+        [ADICIONA_NOTIFICACAO](state, novaNotificacao: INotificacao) {
+            novaNotificacao.id = new Date().getTime()
+            state.notificacoes.push(novaNotificacao)
+
+            setTimeout(() => {
+                state.notificacoes = state.notificacoes.filter(notificacao => notificacao.id != novaNotificacao.id)
+            }, 2000)
+        },
 
     }
 })
